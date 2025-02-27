@@ -1,0 +1,11 @@
+name: asd_interview
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dev_dependencies:
+  melos: ^6.3.2
