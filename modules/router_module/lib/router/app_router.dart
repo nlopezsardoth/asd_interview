@@ -3,7 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:movies_module/router/movies_router.dart';
 import 'package:router_module/router/routes/movies_router.dart';
 import 'package:router_module/router/routes/shared_router.dart';
-import 'package:shared_module/router/shared_router.dart';
+import 'package:shared_module/core/router/shared_router.dart';
 
 part 'app_router.gr.dart';
 

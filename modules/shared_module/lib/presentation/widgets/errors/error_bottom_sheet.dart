@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:router_module/config/router_locator.dart';
 import 'package:router_module/router/asd_router.dart';
 import 'package:shared_module/presentation/widgets/errors/popover.dart';
-import 'package:shared_module/utils/extensions/context_extensions.dart';
+import 'package:shared_module/core/utils/extensions/context_extensions.dart';
 
 enum ErrorType { somethingWentWrong }
 

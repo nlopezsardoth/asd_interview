@@ -12,10 +12,10 @@ abstract class Failure {
   }
 }
 
-class LocalFailure extends Failure {
-  LocalFailure({required super.message});
+class LocalStorageFailure extends Failure {
+  LocalStorageFailure({required super.message});
 }
 
-class QrFailure extends Failure {
-  QrFailure({required super.message});
+class MoviesServerFailure extends Failure {
+  MoviesServerFailure({required super.message});
 }
