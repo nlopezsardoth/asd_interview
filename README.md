@@ -124,6 +124,7 @@ Future<void> initMoviesLocator() async {
       () => GetMoviesUseCase(moviesLocator<MovieRepository>()),
     );
 }
+```
 
 > **Why** use **GetIt** for **DI?**
 > - **Explicit** and predictable: **GetI** provides a clear way to register and retrieve dependencies.
@@ -142,6 +143,11 @@ or
 ```sh
 flutter run -t lib/environments/main_prod.dart
 ```
+
+> **Why use flavors?**
+> - Allows different configurations for staging, production, or testing.
+> - Separates API keys, logging levels, and feature flags per environment.
+> - Improves security by keeping production and development settings distinct.
 
 ## Testing
 Unit and widget tests are written for business logic and UI components.
