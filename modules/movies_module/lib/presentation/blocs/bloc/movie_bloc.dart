@@ -96,7 +96,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState>
     SearchMovies event,
     Emitter<MovieState> emit,
   ) async {
-    emit(state.copyWith(searchStatus: MovieStatus.loading, movieDetail: null));
+    emit(state.copyWith(searchStatus: MovieStatus.loading));
     final result = await _searchMoviesUseCase.call(event.query);
     result.fold((failure) {
       add(ShowError(failure.message));
@@ -108,7 +108,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState>
     GetMovieDetails event,
     Emitter<MovieState> emit,
   ) async {
-    emit(state.copyWith(detailsStatus: MovieStatus.loading));
+    emit(state.copyWith(detailsStatus: MovieStatus.loading, movieDetail: null));
     final result = await _getMovieDetailsUsecase.call(event.movieId);
     result.fold((failure) {
       add(ShowError(failure.message));
