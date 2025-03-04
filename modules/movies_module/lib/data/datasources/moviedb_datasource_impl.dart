@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:movies_module/data/datasources/moviedb_datasource.dart';
@@ -25,7 +26,7 @@ class MoviedbDatasourceImpl extends MoviedbDatasource {
               queryParameters: {'api_key': Env.movieDbKey, 'language': 'es-MX'},
             ),
             interceptors: [
-              LogInterceptor(logPrint: (o) => print(o.toString())),
+              LogInterceptor(logPrint: (o) => log(o.toString())),
             ],
           );
 

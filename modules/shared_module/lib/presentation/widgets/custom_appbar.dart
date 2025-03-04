@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_module/domain/entities/movie.dart';
 import 'package:movies_module/presentation/blocs/bloc/movie_bloc.dart';
 import 'package:movies_module/presentation/delegates/search_movie_delegate.dart';
-import 'package:router_module/config/router_locator.dart';
-import 'package:router_module/router/asd_router.dart';
-import 'package:router_module/router/routes/movies_router.dart';
 import 'package:shared_module/core/utils/extensions/context_extensions.dart';
+import 'package:shared_module/core/utils/helpers/navigate_helper.dart';
 
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({super.key});
@@ -36,14 +34,14 @@ class CustomAppbar extends StatelessWidget {
                     context: context,
                     delegate: SearchMovieDelegate(
                       fieldLabel: context.l10nMovies.search_movies_label,
-                      searchFunction: (String query) => context.read<MovieBloc>().add(SearchMovies(query))
+                      searchFunction:
+                          (String query) => context.read<MovieBloc>().add(
+                            SearchMovies(query),
+                          ),
                     ),
                   ).then((movie) {
                     if (movie == null) return;
-
-                    routerLocator<AsdRouter>().push(
-                      movieRoute.replaceFirst(":movieId", movie.id.toString()),
-                    );
+                    if(context.mounted) navigateToMovieScreen(context, movie.id);
                   });
                 },
                 icon: const Icon(Icons.search),

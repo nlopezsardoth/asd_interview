@@ -1,3 +1,6 @@
+import 'package:favorites_module/core/favorites_locator.dart';
+import 'package:favorites_module/core/l10n/favorites_localizations.dart';
+import 'package:favorites_module/presentation/bloc/favorites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -18,8 +21,8 @@ const _appName = 'Asd app';
 Future<void> runCore(Flavor environment) async {
   WidgetsFlutterBinding.ensureInitialized();
   Environment.setUpEnv(environment);
-  await _initLocators();
   await _initLocalStorage();
+  await _initLocators();
 
   runApp(_AsdApp());
 }
@@ -27,6 +30,7 @@ Future<void> runCore(Flavor environment) async {
 Future<void> _initLocators() async {
   await initMoviesLocator();
   await initRouterLocator();
+  await initFavoritesLocator();
 }
 
 Future<void> _initLocalStorage() async {
@@ -60,6 +64,9 @@ class _AsdAppState extends State<_AsdApp> {
         BlocProvider<MovieBloc>(
           create: (_) => moviesLocator<MovieBloc>(),
         ),
+        BlocProvider<FavoritesBloc>(
+          create: (_) => favoritesLocator<FavoritesBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -69,10 +76,12 @@ class _AsdAppState extends State<_AsdApp> {
         localizationsDelegates: const [
           ...SharedLocalizations.localizationsDelegates,
           ...MoviesLocalizations.localizationsDelegates,
+          ...FavoritesLocalizations.localizationsDelegates,
         ],
         supportedLocales: const [
           ...SharedLocalizations.supportedLocales,
           ...MoviesLocalizations.supportedLocales,
+          ...FavoritesLocalizations.supportedLocales,
         ],
         builder:
             (_, child) => GlobalLoaderOverlay(

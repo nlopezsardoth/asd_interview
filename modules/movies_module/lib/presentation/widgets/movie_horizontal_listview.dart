@@ -2,9 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_module/domain/entities/movie.dart';
 import 'package:movies_module/presentation/widgets/movie_rating.dart';
-import 'package:router_module/config/router_locator.dart';
-import 'package:router_module/router/asd_router.dart';
-import 'package:router_module/router/routes/movies_router.dart';
+import 'package:shared_module/core/utils/helpers/navigate_helper.dart';
 import 'package:shared_module/presentation/widgets/custom_asset_image.dart';
 
 class MovieHorizontalListview extends StatefulWidget {
@@ -95,16 +93,14 @@ class _Slide extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: GestureDetector(
-                onTap:
-                    () => routerLocator<AsdRouter>().push(
-                      movieRoute.replaceFirst(":movieId", movie.id.toString()),
-                    ),
+                onTap: () => navigateToMovieScreen(context, movie.id),
                 child: FadeInImage(
                   height: 220,
                   fit: BoxFit.cover,
                   placeholder: customAssetImage(),
                   image: NetworkImage(movie.posterPath),
-                  imageErrorBuilder: (context, error, stackTrace) => Container(),
+                  imageErrorBuilder:
+                      (context, error, stackTrace) => Container(),
                 ),
               ),
             ),

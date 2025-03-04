@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:movies_module/domain/entities/movie.dart';
-import 'package:router_module/config/router_locator.dart';
-import 'package:router_module/router/asd_router.dart';
-import 'package:router_module/router/routes/movies_router.dart';
+import 'package:shared_module/core/utils/helpers/navigate_helper.dart';
 import 'package:shared_module/presentation/widgets/custom_asset_image.dart';
 
 class MoviesSlideshow extends StatelessWidget {
@@ -57,10 +55,7 @@ class _Slide extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: GestureDetector(
-            onTap:
-                () => routerLocator<AsdRouter>().push(
-                  movieRoute.replaceFirst(":movieId", movie.id.toString()),
-                ),
+            onTap: () => navigateToMovieScreen(context, movie.id),
             child: FadeInImage(
               fit: BoxFit.cover,
               placeholder: customAssetImage(),

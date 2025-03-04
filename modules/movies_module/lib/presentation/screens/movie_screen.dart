@@ -14,32 +14,26 @@ class MovieScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MovieBloc()..add(GetMovieDetails(movieId)),
-      child: BlocBuilder<MovieBloc, MovieState>(
-        buildWhen: (context, state) {
-          return state.movieDetail != null;
-        },
-        builder: (context, state) {
-          if (state.movieDetail == null) {
-            return const Scaffold(body: AsdLoader());
-          }
-          return Scaffold(
-            body: CustomScrollView(
-              physics: const ClampingScrollPhysics(),
-              slivers: [
-                CustomSliverAppBar(movie: state.movieDetail!),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => MovieView(movie: state.movieDetail!),
-                    childCount: 1,
-                  ),
+    return BlocBuilder<MovieBloc, MovieState>(
+      builder: (context, state) {
+        if (state.movieDetail == null || state.detailsStatus == MovieStatus.loading) {
+          return const Scaffold(body: AsdLoader());
+        }
+        return Scaffold(
+          body: CustomScrollView(
+            physics: const ClampingScrollPhysics(),
+            slivers: [
+              CustomSliverAppBar(movie: state.movieDetail!),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => MovieView(movie: state.movieDetail!),
+                  childCount: 1,
                 ),
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

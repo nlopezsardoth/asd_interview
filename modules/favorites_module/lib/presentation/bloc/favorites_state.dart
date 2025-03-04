@@ -1,17 +1,30 @@
 part of 'favorites_bloc.dart';
 
-abstract class FavoritesState {}
+enum FavoriteStatus { initial, loading, success, failure }
 
-class FavoritesInitial extends FavoritesState {}
+class FavoritesState extends Equatable {
+  final FavoriteStatus status;
+  final List<Movie>? favorites;
+  final bool? isFavorite;
 
-class FavoritesLoading extends FavoritesState {}
+  const FavoritesState({
+    this.status = FavoriteStatus.initial,
+    this.favorites,
+    this.isFavorite,
+  });
 
-class FavoritesLoaded extends FavoritesState {
-  final List<Movie> favorites;
-  FavoritesLoaded(this.favorites);
-}
+  FavoritesState copyWith({
+    FavoriteStatus? status,
+    List<Movie>? favorites,
+    bool? isFavorite,
+  }) {
+    return FavoritesState(
+      status: status ?? this.status,
+      favorites: favorites ?? this.favorites,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 
-class FavoritesError extends FavoritesState {
-  final String message;
-  FavoritesError(this.message);
+  @override
+  List<Object?> get props => [status, favorites, isFavorite];
 }
