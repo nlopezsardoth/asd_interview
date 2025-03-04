@@ -1,0 +1,12 @@
+{
+  "search_movies_label": "Buscar películas",
+  "loading_movies_error": "Error loading movies",
+
+  "now_playing_title": "En cines",
+  "now_playing_subtitle": "Lunes 20",
+  "upcoming_title": "Próximamente",
+  "upcoming_subtitle": "En este mes",
+  "top_rated_title": "Mejor calificadas",
+  "top_rated_subtitle": "Mejor calificadas"
+
+}

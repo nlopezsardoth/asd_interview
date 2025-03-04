@@ -1,65 +1,60 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
 
 enum LoadingStatus { initialLoading, refreshing, ready }
 
-class LoadingStatusModel extends ChangeNotifier
-    implements ValueListenable<LoadingStatus> {
+mixin LoadingStatusMixin {
+  final LoadingStatusCubit loadingStatus = LoadingStatusCubit();
+}
+
+class LoadingStatusCubit extends Cubit<LoadingStatus> {
   bool _isInitialized = false;
   int _count = 0;
   int _startTime = DateTime.now().millisecondsSinceEpoch;
   int _endTime = DateTime.now().millisecondsSinceEpoch;
 
+  LoadingStatusCubit({bool isInitialized = false}) : super(LoadingStatus.initialLoading) {
+    _isInitialized = isInitialized;
+    if (_isInitialized) {
+      emit(LoadingStatus.ready);
+    }
+  }
+
+  /// Calculates the total loading duration
   int get loadingTime => _endTime - _startTime;
 
-  LoadingStatusModel({bool isInitialized = false})
-      : _isInitialized = isInitialized;
-
+  /// Marks loading as started
   void begin() {
     _count++;
     if (_count == 1 && _isInitialized) {
       _startTime = DateTime.now().millisecondsSinceEpoch;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        notifyListeners();
-      });
+      emit(LoadingStatus.refreshing);
     }
   }
 
+  /// Marks loading as finished
   void end() {
     if (_count > 0) {
       _count--;
       if (_count == 0 && _isInitialized) {
         _endTime = DateTime.now().millisecondsSinceEpoch;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          notifyListeners();
-        });
+        emit(LoadingStatus.ready);
       }
     }
   }
 
+  /// Initializes the loading state
   void setIsInitialized(bool isInitialized) {
     if (_isInitialized != isInitialized) {
       _isInitialized = isInitialized;
       if (_count == 0) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          notifyListeners();
-        });
+        emit(_isInitialized ? LoadingStatus.ready : LoadingStatus.initialLoading);
       }
     }
   }
 
-  bool get isLoading {
-    return _count > 0;
-  }
+  /// Checks if something is still loading
+  bool get isLoading => _count > 0;
 
   @override
-  LoadingStatus get value {
-    if (!_isInitialized) {
-      return LoadingStatus.initialLoading;
-    }
-    return _count == 0 ? LoadingStatus.ready : LoadingStatus.refreshing;
-  }
-
-  @override
-  String toString() => '${describeIdentity(this)}($_count)';
+  String toString() => 'LoadingStatusCubit(count: $_count, isInitialized: $_isInitialized)';
 }

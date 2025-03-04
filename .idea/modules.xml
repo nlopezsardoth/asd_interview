@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/asd_app/melos_asd_app.iml" filepath="$PROJECT_DIR$/asd_app/melos_asd_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/favorites_module/melos_favorites_module.iml" filepath="$PROJECT_DIR$/modules/favorites_module/melos_favorites_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/movies_module/melos_movies_module.iml" filepath="$PROJECT_DIR$/modules/movies_module/melos_movies_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/router_module/melos_router_module.iml" filepath="$PROJECT_DIR$/modules/router_module/melos_router_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/shared_module/melos_shared_module.iml" filepath="$PROJECT_DIR$/modules/shared_module/melos_shared_module.iml" />
       <module fileurl="file://$PROJECT_DIR$/melos_seek_app.iml" filepath="$PROJECT_DIR$/melos_seek_app.iml" />
     </modules>
   </component>

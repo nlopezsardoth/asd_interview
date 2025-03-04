@@ -1,0 +1,8 @@
+# melos_managed_dependency_overrides: movies_module,router_module,shared_module
+dependency_overrides:
+  movies_module:
+    path: ../movies_module
+  router_module:
+    path: ../router_module
+  shared_module:
+    path: ../shared_module

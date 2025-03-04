@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:movies_module/core/l10n/movies_localizations.dart';
+import 'package:movies_module/core/movies_locator.dart';
+import 'package:movies_module/presentation/blocs/bloc/movie_bloc.dart';
+import 'package:movies_module/presentation/cubits/movie_list_cubits.dart';
 import 'package:router_module/config/router_locator.dart';
 import 'package:router_module/router/app_router.dart';
 import 'package:shared_module/core/environments/environment.dart';
@@ -20,9 +25,8 @@ Future<void> runCore(Flavor environment) async {
 }
 
 Future<void> _initLocators() async {
-  // await initSharedLocator();
+  await initMoviesLocator();
   await initRouterLocator();
-  // await initHomeLocator();
 }
 
 Future<void> _initLocalStorage() async {
@@ -39,26 +43,45 @@ class _AsdApp extends StatefulWidget {
 class _AsdAppState extends State<_AsdApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: _appName,
-      theme: lightTheme.getTheme(),
-      routerConfig: AppRouter().config(),
-      localizationsDelegates: const [
-        ...SharedLocalizations.localizationsDelegates,
-        // ...HomeLocalizations.localizationsDelegates,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NowPlayingCubit>(
+          create: (_) => moviesLocator<NowPlayingCubit>(),
+        ),
+        BlocProvider<PopularCubit>(
+          create: (_) => moviesLocator<PopularCubit>(),
+        ),
+        BlocProvider<TopRatedCubit>(
+          create: (_) => moviesLocator<TopRatedCubit>(),
+        ),
+        BlocProvider<UpcomingCubit>(
+          create: (_) => moviesLocator<UpcomingCubit>(),
+        ),
+        BlocProvider<MovieBloc>(
+          create: (_) => moviesLocator<MovieBloc>(),
+        ),
       ],
-      supportedLocales: const [
-        ...SharedLocalizations.supportedLocales,
-        // ...HomeLocalizations.supportedLocales
-      ],
-      builder:
-          (_, child) => GlobalLoaderOverlay(
-            overlayWidgetBuilder: (_) {
-              return const LoadingOverlayContent(displayOverlay: true);
-            },
-            child: child!,
-          ),
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: _appName,
+        theme: lightTheme.getTheme(),
+        routerConfig: AppRouter().config(),
+        localizationsDelegates: const [
+          ...SharedLocalizations.localizationsDelegates,
+          ...MoviesLocalizations.localizationsDelegates,
+        ],
+        supportedLocales: const [
+          ...SharedLocalizations.supportedLocales,
+          ...MoviesLocalizations.supportedLocales,
+        ],
+        builder:
+            (_, child) => GlobalLoaderOverlay(
+              overlayWidgetBuilder: (_) {
+                return const LoadingOverlayContent(displayOverlay: true);
+              },
+              child: child!,
+            ),
+      ),
     );
   }
 }

@@ -1,12 +1,9 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:movies_module/data/datasources/moviedb_datasource.dart';
-import 'package:movies_module/data/mappers/actor_mapper.dart';
 import 'package:movies_module/data/mappers/movie_mapper.dart';
-import 'package:movies_module/data/models/moviedb/credits_response.dart';
 import 'package:movies_module/data/models/moviedb/movie_details.dart';
 import 'package:movies_module/data/models/moviedb/moviedb_response.dart';
-import 'package:movies_module/domain/entities/actor.dart';
 import 'package:movies_module/domain/entities/movie.dart';
 import 'package:shared_module/core/environments/env.dart';
 import 'package:shared_module/data/errors/exceptions.dart';
@@ -15,7 +12,7 @@ import 'package:shared_module/data/networking/dio_builder.dart';
 
 class MoviedbDatasourceImpl extends MoviedbDatasource {
   final Dio _dio;
-  MoviedbDatasourceImpl({required Dio? dio})
+  MoviedbDatasourceImpl({Dio? dio})
     : _dio =
           dio ??
           DioBuilder.createDio(
@@ -172,28 +169,4 @@ class MoviedbDatasourceImpl extends MoviedbDatasource {
     }
   }
 
-  @override
-  Future<List<Actor>> getActorsByMovie(int movieId) async {
-    try {
-      final response = await _dio.get('/movie/$movieId/credits');
-
-      final castResponse = CreditsResponse.fromJson(response.data);
-
-      List<Actor> actors =
-          castResponse.cast
-              .map((cast) => ActorMapper.castToEntity(cast))
-              .toList();
-
-      return actors;
-    } on ServerException {
-      rethrow;
-    } on DioException catch (e) {
-      throw ServerException(
-        message: '${e.message} ${e.response}',
-        statusCode: e.response?.statusCode ?? HttpStatus.serviceUnavailable,
-      );
-    } catch (e) {
-      throw MoviesServerFailure(message: e.toString());
-    }
-  }
 }

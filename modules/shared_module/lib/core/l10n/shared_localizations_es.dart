@@ -16,4 +16,7 @@ class SharedLocalizationsEs extends SharedLocalizations {
 
   @override
   String get understood_button_text => 'Entendido';
+
+  @override
+  String get appbar_title => 'Asd Movies';
 }

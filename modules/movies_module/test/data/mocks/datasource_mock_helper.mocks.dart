@@ -6,9 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movies_module/data/datasources/hive_datasource.dart' as _i6;
 import 'package:movies_module/data/datasources/moviedb_datasource.dart' as _i3;
-import 'package:movies_module/domain/entities/actor.dart' as _i5;
 import 'package:movies_module/domain/entities/movie.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -108,61 +106,6 @@ class MockMoviedbDatasource extends _i1.Mock implements _i3.MoviedbDatasource {
         Invocation.method(
           #searchMovies,
           [query],
-        ),
-        returnValue: _i4.Future<List<_i2.Movie>>.value(<_i2.Movie>[]),
-      ) as _i4.Future<List<_i2.Movie>>);
-
-  @override
-  _i4.Future<List<_i5.Actor>> getActorsByMovie(int? movieId) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getActorsByMovie,
-          [movieId],
-        ),
-        returnValue: _i4.Future<List<_i5.Actor>>.value(<_i5.Actor>[]),
-      ) as _i4.Future<List<_i5.Actor>>);
-}
-
-/// A class which mocks [HiveDatasource].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockHiveDatasource extends _i1.Mock implements _i6.HiveDatasource {
-  MockHiveDatasource() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<bool> isMovieFavorite(int? movieId) => (super.noSuchMethod(
-        Invocation.method(
-          #isMovieFavorite,
-          [movieId],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-
-  @override
-  _i4.Future<void> toggleFavorite(_i2.Movie? movie) => (super.noSuchMethod(
-        Invocation.method(
-          #toggleFavorite,
-          [movie],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-
-  @override
-  _i4.Future<List<_i2.Movie>> loadMovies({
-    int? limit = 10,
-    int? offset = 0,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #loadMovies,
-          [],
-          {
-            #limit: limit,
-            #offset: offset,
-          },
         ),
         returnValue: _i4.Future<List<_i2.Movie>>.value(<_i2.Movie>[]),
       ) as _i4.Future<List<_i2.Movie>>);

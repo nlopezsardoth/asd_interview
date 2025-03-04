@@ -7,13 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movies_module/domain/entities/actor.dart' as _i6;
-import 'package:movies_module/domain/entities/movie.dart' as _i8;
-import 'package:movies_module/domain/repositories/actors_repository.dart'
-    as _i3;
-import 'package:movies_module/domain/repositories/favorites_repository.dart'
-    as _i9;
-import 'package:movies_module/domain/repositories/movie_repository.dart' as _i7;
+import 'package:movies_module/domain/entities/movie.dart' as _i6;
+import 'package:movies_module/domain/repositories/movie_repository.dart' as _i3;
 import 'package:shared_module/data/errors/failures.dart' as _i5;
 
 // ignore_for_file: type=lint
@@ -40,44 +35,17 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-/// A class which mocks [ActorsRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockActorsRepository extends _i1.Mock implements _i3.ActorsRepository {
-  MockActorsRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Actor>>> getActorsByMovie(
-          int? movieId) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getActorsByMovie,
-          [movieId],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<_i6.Actor>>>.value(
-            _FakeEither_0<_i5.Failure, List<_i6.Actor>>(
-          this,
-          Invocation.method(
-            #getActorsByMovie,
-            [movieId],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.Actor>>>);
-}
-
 /// A class which mocks [MovieRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieRepository extends _i1.Mock implements _i7.MovieRepository {
+class MockMovieRepository extends _i1.Mock implements _i3.MovieRepository {
   MockMovieRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>> getMovies(
-    _i7.ListType? listType,
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Movie>>> getMovies(
+    _i3.ListType? listType,
     int? page,
   ) =>
       (super.noSuchMethod(
@@ -88,8 +56,8 @@ class MockMovieRepository extends _i1.Mock implements _i7.MovieRepository {
             page,
           ],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>.value(
-            _FakeEither_0<_i5.Failure, List<_i8.Movie>>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<_i6.Movie>>>.value(
+            _FakeEither_0<_i5.Failure, List<_i6.Movie>>(
           this,
           Invocation.method(
             #getMovies,
@@ -99,101 +67,40 @@ class MockMovieRepository extends _i1.Mock implements _i7.MovieRepository {
             ],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.Movie>>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>> searchMovies(
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Movie>>> searchMovies(
           String? query) =>
       (super.noSuchMethod(
         Invocation.method(
           #searchMovies,
           [query],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>.value(
-            _FakeEither_0<_i5.Failure, List<_i8.Movie>>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<_i6.Movie>>>.value(
+            _FakeEither_0<_i5.Failure, List<_i6.Movie>>(
           this,
           Invocation.method(
             #searchMovies,
             [query],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.Movie>>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i8.Movie>> getMovieDetails(int? id) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Movie>> getMovieDetails(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getMovieDetails,
           [id],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i8.Movie>>.value(
-            _FakeEither_0<_i5.Failure, _i8.Movie>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Movie>>.value(
+            _FakeEither_0<_i5.Failure, _i6.Movie>(
           this,
           Invocation.method(
             #getMovieDetails,
             [id],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i8.Movie>>);
-}
-
-/// A class which mocks [FavoritesRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockFavoritesRepository extends _i1.Mock
-    implements _i9.FavoritesRepository {
-  MockFavoritesRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, void>> toggleFavorite(_i8.Movie? movie) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #toggleFavorite,
-          [movie],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, void>>.value(
-            _FakeEither_0<_i5.Failure, void>(
-          this,
-          Invocation.method(
-            #toggleFavorite,
-            [movie],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, void>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, bool>> isMovieFavorite(int? movieId) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #isMovieFavorite,
-          [movieId],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
-            _FakeEither_0<_i5.Failure, bool>(
-          this,
-          Invocation.method(
-            #isMovieFavorite,
-            [movieId],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>> getFavorites() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getFavorites,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>.value(
-            _FakeEither_0<_i5.Failure, List<_i8.Movie>>(
-          this,
-          Invocation.method(
-            #getFavorites,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Movie>>);
 }

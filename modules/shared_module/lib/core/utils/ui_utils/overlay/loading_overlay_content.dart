@@ -21,5 +21,4 @@ class LoadingOverlayContent extends StatelessWidget {
       ),
     );
   }
-
 }

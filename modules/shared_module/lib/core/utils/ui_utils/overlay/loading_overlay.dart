@@ -1,26 +1,27 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_module/core/utils/ui_utils/overlay/loading_overlay_content.dart';
 import 'package:shared_module/core/utils/ui_utils/overlay/loading_status_model.dart';
 
 class LoadingOverlay extends StatelessWidget {
   static const double overlayDefaultOpacity = 0.85;
 
-  final ValueListenable<LoadingStatus> loadingStatus;
+  final LoadingStatusCubit loadingStatusCubit;
   final Widget child;
 
   const LoadingOverlay({
     super.key,
-    required this.loadingStatus,
+    required this.loadingStatusCubit,
     required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<LoadingStatus>(
-      valueListenable: loadingStatus,
-      builder: _buildContent,
-      child: child,
+    return BlocBuilder<LoadingStatusCubit, LoadingStatus>(
+      bloc: loadingStatusCubit,
+      builder: (context, state) {
+        return _buildContent(context, state, child);
+      },
     );
   }
 

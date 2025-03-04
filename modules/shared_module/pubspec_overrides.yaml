@@ -1,0 +1,8 @@
+# melos_managed_dependency_overrides: favorites_module,movies_module,router_module
+dependency_overrides:
+  favorites_module:
+    path: ../favorites_module
+  movies_module:
+    path: ../movies_module
+  router_module:
+    path: ../router_module

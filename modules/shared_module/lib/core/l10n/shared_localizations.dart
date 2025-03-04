@@ -110,6 +110,12 @@ abstract class SharedLocalizations {
   /// In es, this message translates to:
   /// **'Entendido'**
   String get understood_button_text;
+
+  /// No description provided for @appbar_title.
+  ///
+  /// In es, this message translates to:
+  /// **'Asd Movies'**
+  String get appbar_title;
 }
 
 class _SharedLocalizationsDelegate extends LocalizationsDelegate<SharedLocalizations> {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_module/core/l10n/movies_localizations.dart';
 import 'package:shared_module/core/l10n/shared_localizations.dart';
-// import 'package:auth_module/l10n/auth_localizations.dart';
-// import 'package:home_module/l10n/home_localizations.dart';
-// import 'package:shared_module/l10n/shared_localizations.dart';
 
 extension BuildContextExt on BuildContext {
 
@@ -11,6 +9,6 @@ extension BuildContextExt on BuildContext {
 
   SharedLocalizations get l10nShared => SharedLocalizations.of(this)!;
 
-  // HomeLocalizations get l10nHome => HomeLocalizations.of(this)!;
+  MoviesLocalizations get l10nMovies => MoviesLocalizations.of(this)!;
 
 }
